@@ -1,0 +1,31 @@
+<section id="s10-performance" data-transition="fade" style="background:#101826;color:#EEF1F5;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">Performance</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Same query, three table designs, EXPLAIN</h2>
+</div>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:32px">
+<p style="font-size:26px;font-weight:600;color:#AEB9C9">1. Primary key only</p>
+<h3 style="font-size:38px;font-weight:600;color:#E8A93A">Full table scan</h3>
+<p style="font-size:28px;line-height:1.35">type = ALL: every row is examined.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:32px">
+<p style="font-size:26px;font-weight:600;color:#AEB9C9">2. Composite index</p>
+<h3 style="font-size:38px;font-weight:600;color:#E8A93A">Range lookup</h3>
+<p style="font-size:28px;line-height:1.35">(product, warehouse, time): only that item's rows.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:32px">
+<p style="font-size:26px;font-weight:600;color:#AEB9C9">3. Index + partitions</p>
+<h3 style="font-size:38px;font-weight:600;color:#E8A93A">Partition pruning</h3>
+<p style="font-size:28px;line-height:1.35">A month's report reads one quarter, not the table.</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:28px;line-height:1.4"><b>Query A:</b> one product, one warehouse, last 90 days.</p>
+<p style="font-size:28px;line-height:1.4"><b>Query B:</b> movements per type for one month.</p>
+<p style="font-size:28px;color:#AEB9C9;line-height:1.4">Live: the Speed lab page shows each EXPLAIN plan, rows examined and elapsed time.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#AEB9C9">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#AEB9C9">10 / 15</p>
+<aside>Slide 10 (about 60 seconds). The procedure sp_build_performance_lab copies the ledger into two ordinary tables, so the identical query can run on three designs: a plain table, an indexed table, and the real partitioned and indexed ledger. Query A shows the index: a full scan becomes a range lookup. Query B shows partition pruning: EXPLAIN lists only the partition holding that month. Show the live numbers from the Performance page rather than quoting any figure here. If asked why the gain is modest on a small table: the effect grows with row count, and the project can be rebuilt with 200,000 rows.</aside>
+</section>

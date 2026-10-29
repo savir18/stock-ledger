@@ -1,0 +1,29 @@
+<section id="s08-transfers" data-transition="fade" style="background:#101826;color:#EEF1F5;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">Transactions in practice</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Transfers and corrections</h2>
+</div>
+<div style="display:flex;gap:32px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:40px">
+<h3 style="font-size:40px;font-weight:600;color:#E8A93A">Transfer: one transaction, two rows</h3>
+<ul style="font-size:30px;line-height:1.4">
+<li>TRANSFER_OUT (−n) at the source, TRANSFER_IN (+n) at the destination</li>
+<li>Linked by one transfer_id: both rows or neither</li>
+<li>Source stock is checked under lock, so it never goes negative</li>
+<li>Warehouse rows are locked in ascending id order: opposite transfers cannot deadlock</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:40px">
+<h3 style="font-size:40px;font-weight:600;color:#E8A93A">Correction: a new row, not an edit</h3>
+<ul style="font-size:30px;line-height:1.4">
+<li>A REVERSAL row has the exact opposite quantity</li>
+<li>It points to the original through reverses_ledger_id</li>
+<li>The original is never touched and shows as reversed</li>
+<li>An entry can be reversed once; a reversal cannot be reversed</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#AEB9C9">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#AEB9C9">8 / 15</p>
+<aside>Slide 8 (about 60 seconds). Two applications of the same transaction pattern. A transfer is the classic atomic operation: debit one warehouse and credit another, as two ledger rows tied by a transfer_id. Mention the deadlock-avoidance rule: always lock the lower warehouse id first. A correction is just another ledger row. The trigger enforces the rules, so even a direct SQL call cannot reverse the same entry twice. Live demo: Record and transfer page, move stock between warehouses, then Ledger history and click Reverse; the original row is struck through and a REVERSAL row appears.</aside>
+</section>

@@ -1,0 +1,20 @@
+<section id="s09-analytics" data-transition="fade" style="background:#F7F5F0;color:#17202E;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A5B00">Analytics</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Window functions on the ledger</h2>
+</div>
+<div style="background:#101826;border-radius:16px;padding:28px 36px">
+<p style="font-family:'JetBrains Mono', monospace;font-size:26px;line-height:1.5;color:#EEF1F5;white-space:nowrap">SUM(quantity_change) OVER (ORDER BY entry_time, ledger_id) AS running_balance</p>
+</div>
+<table style="font-size:28px;color:#17202E">
+<tr><th style="width:38%;text-align:left">Question</th><th style="width:62%;text-align:left">SQL technique</th></tr>
+<tr><td>Balance after every movement</td><td>SUM() OVER (ORDER BY …)</td></tr>
+<tr><td>ABC classes (80 / 15 / 5)</td><td>CTE + cumulative SUM() OVER</td></tr>
+<tr><td>Dead stock</td><td>LEFT JOIN + date arithmetic</td></tr>
+<tr><td>Stock on a past date</td><td>SUM() with entry_time &lt;= t</td></tr>
+<tr><td>Next-week forecast</td><td>Recursive CTE, AVG() OVER 4 rows, least squares</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#4A5568">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#4A5568">9 / 15</p>
+<aside>Slide 9 (about 60 seconds). Because history is kept, analytics are just queries on it. The running balance is a single window function. ABC classification ranks products by sales value and uses a cumulative SUM OVER to find the products making up the first 80 percent. Dead stock finds items with stock but no recent sale. Stock as of a date is impossible in an overwrite design and trivial here. The forecast is deliberately simple and explainable: a four-week moving average and a straight-line trend from SUM aggregates, with a recursive CTE producing the 12-week calendar. No machine learning. Live demo: Analytics page, and the running-balance chart on Ledger history.</aside>
+</section>

@@ -1,0 +1,39 @@
+<section id="s05-ledger" data-transition="fade" style="background:#F7F5F0;color:#17202E;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A5B00">The ledger table</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Built for appends and for history queries</h2>
+</div>
+<div style="display:flex;gap:48px;align-items:stretch">
+<div style="width:900px;display:flex;flex-direction:column;gap:2px;background:#101826;border-radius:16px;padding:32px 36px">
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap">CREATE TABLE stock_ledger (</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">ledger_id BIGINT AUTO_INCREMENT,</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">entry_time DATETIME(6) NOT NULL,</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">product_id INT, warehouse_id INT,</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">type_id TINYINT, user_id INT,</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">quantity_change INT NOT NULL,</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">unit_cost DECIMAL(12,2),</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">supplier_id INT NULL, transfer_id INT NULL,</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">reverses_ledger_id BIGINT NULL,</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#E8A93A;white-space:nowrap;padding:0 0 0 32px">PRIMARY KEY (ledger_id, entry_time),</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#E8A93A;white-space:nowrap;padding:0 0 0 32px">CHECK (quantity_change &lt;&gt; 0)</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap">) PARTITION BY RANGE (TO_DAYS(entry_time));</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:column;gap:8px;background:#FDFCF8;border:1px solid #DAD6CB;border-radius:16px;padding:28px 32px">
+<h3 style="font-size:32px;font-weight:600">Composite primary key</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.35">MySQL needs the partition column inside every unique key.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FDFCF8;border:1px solid #DAD6CB;border-radius:16px;padding:28px 32px">
+<h3 style="font-size:32px;font-weight:600">No foreign keys</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.35">Not allowed on partitioned InnoDB tables. A trigger checks every reference.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FDFCF8;border:1px solid #DAD6CB;border-radius:16px;padding:28px 32px">
+<h3 style="font-size:32px;font-weight:600">4 indexes, 10 partitions</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.35">Quarterly partitions plus (product, warehouse, time) for history lookups.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#4A5568">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#4A5568">5 / 15</p>
+<aside>Slide 5 (about 60 seconds). Abridged DDL for the ledger. Three design decisions worth saying out loud. One: the primary key is (ledger_id, entry_time) because MySQL demands the partitioning column in every unique key. Two: no foreign keys, again because of partitioning, so trigger trg_ledger_bi does the checking. Three: the CHECK stops zero-quantity rows, and the table is partitioned by quarter with four secondary indexes. Slide 10 shows what that buys. If asked: the real DDL is in sql/01_schema.sql.</aside>
+</section>

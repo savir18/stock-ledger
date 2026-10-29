@@ -1,0 +1,18 @@
+{
+  "v": 4,
+  "createdOnFiles": {"v": 1, "at": "2026-10-20T05:30:00Z"},
+  "lists": "css",
+  "title": "Immutable Stock Ledger System – Presentation",
+  "order": ["s01-title","s02-problem","s03-idea","s04-schema","s05-ledger","s06-triggers","s07-writepath","s08-transfers","s09-analytics","s10-performance","s11-security","s12-recovery","s13-demo","s14-testing","s15-covers"],
+  "sections": {
+    "a": {"description": "Why stock should be a ledger, not a number.", "start": "s01-title"},
+    "b": {"description": "The schema and the rules MySQL enforces itself.", "start": "s04-schema"},
+    "c": {"description": "Analytics, performance, security and recovery.", "start": "s09-analytics"},
+    "d": {"description": "Live demonstration, testing and wrap-up.", "start": "s13-demo"}
+  },
+  "faces": {
+    "ibm-plex-sans": {"family": "IBM Plex Sans", "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"},
+    "jetbrains-mono": {"family": "JetBrains Mono", "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"}
+  },
+  "designSystems": []
+}

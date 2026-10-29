@@ -1,0 +1,38 @@
+<section id="s12-recovery" data-transition="fade" style="background:#101826;color:#EEF1F5;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">Recovery</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Backup + binary log = any second</h2>
+</div>
+<div style="display:flex;gap:20px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:28px">
+<p style="font-size:26px;font-weight:600;color:#E8A93A">1</p>
+<h3 style="font-size:34px;font-weight:600">Back up</h3>
+<p style="font-size:26px;color:#AEB9C9;line-height:1.35">mysqldump with flush-logs and source-data</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:28px">
+<p style="font-size:26px;font-weight:600;color:#E8A93A">2</p>
+<h3 style="font-size:34px;font-weight:600">Keep working</h3>
+<p style="font-size:26px;color:#AEB9C9;line-height:1.35">New rows go to the binary log</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#3A1F24;border:1px solid #7A3B44;border-radius:16px;padding:28px">
+<p style="font-size:26px;font-weight:600;color:#F2A7AE">3</p>
+<h3 style="font-size:34px;font-weight:600">Disaster</h3>
+<p style="font-size:26px;color:#F2C9CD;line-height:1.35">TRUNCATE skips the triggers</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:28px">
+<p style="font-size:26px;font-weight:600;color:#E8A93A">4</p>
+<h3 style="font-size:34px;font-weight:600">Restore</h3>
+<p style="font-size:26px;color:#AEB9C9;line-height:1.35">Load the dump</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:28px">
+<p style="font-size:26px;font-weight:600;color:#E8A93A">5</p>
+<h3 style="font-size:34px;font-weight:600">Replay</h3>
+<p style="font-size:26px;color:#AEB9C9;line-height:1.35">mysqlbinlog to one second before</p>
+</div>
+</div>
+<p style="font-size:30px;line-height:1.4">Verify: the row count matches, and v_reconciliation shows no differences.</p>
+<p style="font-size:28px;color:#AEB9C9;line-height:1.4">Append-only helps here: replaying the log can never overwrite a later correction with an older value.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#AEB9C9">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#AEB9C9">12 / 15</p>
+<aside>Slide 12 (about 45 seconds). Closing the gap from slide 6. TRUNCATE and DROP skip triggers, so the defence is a backup plus the binary log. Take a mysqldump with flush-logs, which starts a new log, and source-data=2, which records the log position inside the dump. After a disaster, restore the dump, then replay the binary log with mysqlbinlog up to one second before the mistake. Finish by checking the row count and the reconciliation view. The commands are in docs/RECOVERY.md. Decide beforehand whether to demo it live (takes several minutes) or just describe it; the safe choice is to describe it and show the file.</aside>
+</section>

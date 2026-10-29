@@ -1,0 +1,32 @@
+<section id="s06-triggers" data-transition="fade" style="background:#101826;color:#EEF1F5;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">Rules inside the database</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Four triggers guard the ledger</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="display:flex;flex-direction:column;gap:10px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:32px">
+<p style="font-family:'JetBrains Mono', monospace;font-size:28px;font-weight:600;color:#E8A93A">trg_ledger_no_update</p>
+<p style="font-size:26px;font-weight:600;color:#AEB9C9">BEFORE UPDATE</p>
+<p style="font-size:28px;line-height:1.35">Raises SQLSTATE 45000: “stock_ledger is append-only”. Add a reversing entry instead.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:32px">
+<p style="font-family:'JetBrains Mono', monospace;font-size:28px;font-weight:600;color:#E8A93A">trg_ledger_no_delete</p>
+<p style="font-size:26px;font-weight:600;color:#AEB9C9">BEFORE DELETE</p>
+<p style="font-size:28px;line-height:1.35">Same refusal for DELETE. Even the administrator cannot rewrite history.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:32px">
+<p style="font-family:'JetBrains Mono', monospace;font-size:28px;font-weight:600;color:#E8A93A">trg_ledger_bi</p>
+<p style="font-size:26px;font-weight:600;color:#AEB9C9">BEFORE INSERT</p>
+<p style="font-size:28px;line-height:1.35">Validates every reference, the sign against the type (a sale must be negative), transfer legs and reversal rules.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#1A2538;border:1px solid #2B3A52;border-radius:16px;padding:32px">
+<p style="font-family:'JetBrains Mono', monospace;font-size:28px;font-weight:600;color:#E8A93A">trg_ledger_ai</p>
+<p style="font-size:26px;font-weight:600;color:#AEB9C9">AFTER INSERT</p>
+<p style="font-size:28px;line-height:1.35">Updates stock_balance and daily_stock_summary inside the same transaction.</p>
+</div>
+</div>
+<p style="font-size:28px;color:#AEB9C9;line-height:1.4">Known gap: TRUNCATE and DROP do not fire triggers. Privileges prevent them and binary logs recover from them (slide 12).</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#AEB9C9">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#AEB9C9">6 / 15</p>
+<aside>Slide 6 (about 60 seconds). This is where “immutable” is enforced by MySQL itself rather than by the application. Two triggers refuse UPDATE and DELETE with SIGNAL. One validates every insert, replacing the foreign keys we cannot have. One keeps the summary tables in sync. Be upfront about the limit: TRUNCATE and DROP bypass triggers, which is why the app account has no such privileges and why recovery (slide 12) exists. Live demo: Integrity page, buttons Try UPDATE and Try DELETE, or run UPDATE stock_ledger SET quantity_change = 1 in the mysql prompt.</aside>
+</section>

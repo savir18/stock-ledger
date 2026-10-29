@@ -1,0 +1,27 @@
+<section id="s11-security" data-transition="fade" style="background:#F7F5F0;color:#17202E;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A5B00">Security</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Least privilege, enforced in two layers</h2>
+</div>
+<div style="display:flex;gap:32px;align-items:stretch">
+<div style="width:700px;display:flex;flex-direction:column;gap:16px;background:#FDFCF8;border:1px solid #DAD6CB;border-radius:16px;padding:36px">
+<h3 style="font-size:36px;font-weight:600">Layer 1: MySQL privileges</h3>
+<p style="font-size:28px;line-height:1.4">The dashboard logs in as <span style="color:#9A5B00;font-weight:600">ledger_app</span>: SELECT and EXECUTE only.</p>
+<p style="font-size:28px;line-height:1.4">No INSERT, UPDATE, DELETE, DROP or TRUNCATE on anything.</p>
+<p style="font-size:28px;line-height:1.4">Four MySQL roles: ledger_admin, ledger_warehouse, ledger_purchasing, ledger_analyst.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FDFCF8;border:1px solid #DAD6CB;border-radius:16px;padding:36px">
+<h3 style="font-size:36px;font-weight:600">Layer 2: business roles in the procedures</h3>
+<table style="font-size:26px;color:#17202E">
+<tr><th style="width:36%;text-align:left">Role</th><th style="width:64%;text-align:left">May post</th></tr>
+<tr><td>Admin</td><td>Everything</td></tr>
+<tr><td>Warehouse Manager</td><td>Sale, return in, write-off, adjustment, transfer</td></tr>
+<tr><td>Purchase Officer</td><td>Purchase, return out</td></tr>
+<tr><td>Analyst</td><td>Nothing (read only)</td></tr>
+</table>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#4A5568">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#4A5568">11 / 15</p>
+<aside>Slide 11 (about 45 seconds). Two layers. First, real MySQL privileges: the account the web app uses can only read and execute. Even a bug or SQL injection in the dashboard could not write to a table directly. Second, business roles checked inside the procedures by fn_role_can, so each user type can only post the entries that suit their job. Third, each role signs in with its own passkey, stored only as a salted SHA-256 hash in a separate schema the web account cannot read. Live demo: sign out, sign in as Analyst (VIEWER-2468); the Record a change page is not offered, and a forced call is refused by the database. Optionally open a mysql prompt as demo_analyst and call sp_record_movement.</aside>
+</section>

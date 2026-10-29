@@ -1,0 +1,39 @@
+<section id="s07-writepath" data-transition="fade" style="background:#F7F5F0;color:#17202E;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#9A5B00">The write path</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Every write is a stored procedure in one transaction</h2>
+</div>
+<div style="display:flex;gap:48px;align-items:stretch">
+<div style="width:900px;display:flex;flex-direction:column;gap:2px;background:#101826;border-radius:16px;padding:32px 36px">
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#AEB9C9;white-space:nowrap">-- sp_record_movement (core)</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap">START TRANSACTION;</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap">SELECT quantity_on_hand INTO v_cur</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">FROM stock_balance</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">WHERE product_id = p AND warehouse_id = w</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#E8A93A;white-space:nowrap;padding:0 0 0 32px">FOR UPDATE;   -- row lock</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap">IF v_cur + v_qty &lt; 0 THEN</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 32px">SIGNAL SQLSTATE '45000'</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap;padding:0 0 0 64px">SET MESSAGE_TEXT = 'Insufficient stock…';</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap">END IF;</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap">INSERT INTO stock_ledger (…) VALUES (…);</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;line-height:1.45;color:#EEF1F5;white-space:nowrap">COMMIT;</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:column;gap:6px;background:#FDFCF8;border:1px solid #DAD6CB;border-radius:16px;padding:22px 28px">
+<h3 style="font-size:30px;font-weight:600">1. Check the role</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.3">fn_role_can decides who may post what.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;background:#FDFCF8;border:1px solid #DAD6CB;border-radius:16px;padding:22px 28px">
+<h3 style="font-size:30px;font-weight:600">2. Lock, then check</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.3">Two sellers are serialized on one row.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;background:#FDFCF8;border:1px solid #DAD6CB;border-radius:16px;padding:22px 28px">
+<h3 style="font-size:30px;font-weight:600">3. Append and commit</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.3">The trigger updates the balance. Any error rolls back.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#4A5568">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#4A5568">7 / 15</p>
+<aside>Slide 7 (about 60 seconds). The app account has no INSERT on the ledger at all; it can only EXECUTE procedures. This is the core of sp_record_movement. READ COMMITTED isolation, then lock the balance row with SELECT ... FOR UPDATE before checking stock, so two people selling the last units are serialized: the second waits, sees the reduced balance and is refused. Then INSERT into the ledger, the AFTER INSERT trigger updates the balance, COMMIT. An exit handler rolls back and re-signals on any error. Live demo: two mysql windows, window A holds the lock, window B hangs until A commits.</aside>
+</section>

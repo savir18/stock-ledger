@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Stock Ledger</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23A45D1C'/%3E%3Cpath d='M8 21h16M8 15h16M8 9h16' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<a class="skip" href="#view">Skip to content</a>
+
+<!-- Sign-in -->
+<section id="login" hidden>
+  <div class="login-side">
+    <div class="mark" aria-hidden="true"><i></i><i></i><i></i></div>
+    <h1>Stock Ledger</h1>
+    <p class="lede">Every change to your stock is written down once and never erased. What is on the shelf is always the sum of what happened.</p>
+    <ul class="points">
+      <li><b>Nothing is overwritten.</b> Mistakes are cancelled with a new entry, so the trail stays honest.</li>
+      <li><b>Each role sees what it needs.</b> A passkey opens the role you choose.</li>
+      <li><b>MySQL enforces the rules,</b> not the web page.</li>
+    </ul>
+  </div>
+  <div class="login-main">
+    <form id="loginForm" class="login-card" autocomplete="off" novalidate>
+      <h2>Sign in</h2>
+      <p class="muted" id="loginHint">Step 1. Choose your role.</p>
+      <div id="roleGrid" class="role-grid" role="radiogroup" aria-label="Role"></div>
+      <div id="passBox" class="pass-box" hidden>
+        <label for="passkey">Passkey for <span id="passRole"></span></label>
+        <div class="pass-row">
+          <input id="passkey" type="password" autocomplete="off" spellcheck="false" placeholder="Enter passkey" aria-describedby="loginErr">
+          <button type="button" id="showPass" class="ghost small" aria-pressed="false">Show</button>
+        </div>
+        <button type="submit" id="loginBtn" class="wide-btn">Open dashboard</button>
+        <p id="loginErr" class="err-line" role="alert" hidden></p>
+        <p class="muted small-note">Passkeys are checked by MySQL. Ask the administrator if you do not have one.</p>
+      </div>
+      <p id="loginOffline" class="err-line" role="alert" hidden></p>
+    </form>
+  </div>
+</section>
+
+<!-- Application -->
+<div id="app" hidden>
+  <header class="top">
+    <button id="menuBtn" class="icon-btn menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">Menu</button>
+    <div class="brand"><span class="mark sm" aria-hidden="true"><i></i><i></i><i></i></span><strong>Stock Ledger</strong></div>
+    <div class="who">
+      <span id="dbpill" class="pill">connected</span>
+      <div class="me"><span id="meName"></span><small id="meRole"></small></div>
+      <button id="logout" class="ghost small">Sign out</button>
+    </div>
+  </header>
+  <div class="layout">
+    <nav id="nav" aria-label="Main"></nav>
+    <main id="view" tabindex="-1"><p class="muted">Loading...</p></main>
+  </div>
+</div>
+
+<dialog id="dlg"></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
