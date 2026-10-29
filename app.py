@@ -8,6 +8,7 @@ All writes go through MySQL stored procedures, never straight into the ledger.
 import datetime
 import decimal
 import functools
+import json
 import os
 import secrets
 import statistics
@@ -486,17 +487,55 @@ LAB_TABLES = [
 ]
 
 
+def explain_row(sql, params):
+    """EXPLAIN one query and return {partitions, type, key, rows}.
+    Column names are matched case-insensitively and, if the tabular plan is
+    empty or unfamiliar (newer MySQL versions), the JSON plan is read instead."""
+    rows = query("EXPLAIN " + sql, params)
+    r = {str(k).lower(): v for k, v in (rows[0] if rows else {}).items()}
+    if r.get("type") is not None or r.get("key") is not None or r.get("rows") is not None:
+        return r
+    try:
+        raw = query("EXPLAIN FORMAT=JSON " + sql, params)[0]
+        doc = json.loads(next(iter(raw.values())))
+    except Exception:
+        return r
+
+    def find(node):
+        if isinstance(node, dict):
+            if "table_name" in node or "access_type" in node:
+                return node
+            for v in node.values():
+                f = find(v)
+                if f:
+                    return f
+        elif isinstance(node, list):
+            for v in node:
+                f = find(v)
+                if f:
+                    return f
+        return None
+
+    t = find(doc) or {}
+    parts = t.get("partitions")
+    return {
+        "partitions": ",".join(parts) if isinstance(parts, list) else parts,
+        "type": t.get("access_type"),
+        "key": t.get("key") or t.get("index_name"),
+        "rows": t.get("rows_examined_per_scan") or t.get("estimated_rows"),
+    }
+
+
 def explain_and_time(sql_template, params, runs=5):
     out = []
     for table, label in LAB_TABLES:
         sql = sql_template.format(t=table)
-        plan = query("EXPLAIN " + sql, params)
+        p = explain_row(sql, params)
         times = []
         for _ in range(runs):
             t0 = time.perf_counter()
             query(sql, params)
             times.append((time.perf_counter() - t0) * 1000)
-        p = plan[0]
         out.append(dict(
             table=table, label=label,
             partitions=p.get("partitions") or "all (no partitioning)",
