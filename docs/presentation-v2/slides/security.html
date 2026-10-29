@@ -1,26 +1,24 @@
-<section id="security" data-transition="fade" style="background:#F3EFE6;color:#0E1A24;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#9A5B00">Security</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Choose a role, enter its passkey</h2>
+<section id="security" data-transition="fade" style="background:#0E2B24;color:#EEF1E8;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#D4A53A;opacity:0.45"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Three guards between a user and the ledger</h2>
+<p style="font-size:30px;line-height:1.4;color:#B7C6BC;width:1400px">A passkey, then a role check in Flask, then the same role check again in MySQL.</p>
 </div>
-<div style="display:flex;flex-direction:row;gap:28px;align-items:stretch">
-<div style="flex:1;display:flex;flex-direction:column;gap:18px;background:#FBF9F3;border:1px solid #DAD3C3;border-radius:20px;padding:40px">
-<h3 style="font-size:36px;font-weight:700;color:#1F7A6F">Three guards</h3>
-<p style="font-size:28px;line-height:1.4"><b>1. Passkey.</b> Salted SHA-256 hash in a separate schema the web account cannot read.</p>
-<p style="font-size:28px;line-height:1.4"><b>2. Flask.</b> Checks the role on every route.</p>
-<p style="font-size:28px;line-height:1.4"><b>3. MySQL.</b> The procedure checks the role again. The web account can only read and execute.</p>
+<!-- row1 y=0 h=190: Browser 0 | Flask 440 | ledger_app 880 | Procedure 1320 (w 340/344); row2 y=290 h=150: sp_login 440 | auth schema 880 -->
+<div style="position:relative;width:1664px;height:450px">
+<div style="position:absolute;left:0;top:0;width:340px;height:190px;display:flex;flex-direction:column;justify-content:center;gap:8px;background:#163A31;border:1px solid #2A5446;border-radius:6px;padding:0 24px"><p style="font-size:28px;font-weight:600">Browser</p><p style="font-size:24px;line-height:1.35;color:#B7C6BC">Pick a role and type its passkey.</p></div>
+<div style="position:absolute;left:440px;top:0;width:340px;height:190px;display:flex;flex-direction:column;justify-content:center;gap:8px;background:#163A31;border:2px solid #D4A53A;border-radius:6px;padding:0 24px"><p style="font-size:28px;font-weight:600">Flask</p><p style="font-size:24px;line-height:1.35;color:#B7C6BC">Signed session. Checks the role on every route. Blocks 5 wrong tries.</p></div>
+<div style="position:absolute;left:880px;top:0;width:340px;height:190px;display:flex;flex-direction:column;justify-content:center;gap:8px;background:#163A31;border:1px solid #2A5446;border-radius:6px;padding:0 24px"><p style="font-size:28px;font-weight:600">MySQL account</p><p style="font-size:24px;line-height:1.35;color:#B7C6BC">ledger_app can only SELECT and EXECUTE. It cannot write a table.</p></div>
+<div style="position:absolute;left:1320px;top:0;width:344px;height:190px;display:flex;flex-direction:column;justify-content:center;gap:8px;background:#163A31;border:2px solid #D4A53A;border-radius:6px;padding:0 24px"><p style="font-size:28px;font-weight:600">Procedure</p><p style="font-size:24px;line-height:1.35;color:#B7C6BC">fn_role_can checks the role again before any write.</p></div>
+<div style="position:absolute;left:440px;top:290px;width:340px;height:150px;display:flex;flex-direction:column;justify-content:center;gap:8px;background:#163A31;border:1px solid #2A5446;border-radius:6px;padding:0 24px"><p style="font-family:'IBM Plex Mono', monospace;font-size:26px;font-weight:500">sp_login</p><p style="font-size:24px;line-height:1.35;color:#B7C6BC">The only door to passkeys.</p></div>
+<div style="position:absolute;left:880px;top:290px;width:340px;height:150px;display:flex;flex-direction:column;justify-content:center;gap:8px;background:#163A31;border:2px solid #D4A53A;border-radius:6px;padding:0 24px"><p style="font-family:'IBM Plex Mono', monospace;font-size:24px;font-weight:500">stock_ledger_auth</p><p style="font-size:24px;line-height:1.35;color:#B7C6BC">Salted SHA-256 hashes only.</p></div>
+<x-connector x1="340" y1="95" x2="440" y2="95" style="color:#D4A53A;border-width:3px"></x-connector>
+<x-connector x1="780" y1="95" x2="880" y2="95" style="color:#D4A53A;border-width:3px"></x-connector>
+<x-connector x1="1220" y1="95" x2="1320" y2="95" style="color:#D4A53A;border-width:3px"></x-connector>
+<x-connector x1="610" y1="190" x2="610" y2="290" style="color:#D4A53A;border-width:3px"></x-connector>
+<x-connector x1="780" y1="365" x2="880" y2="365" style="color:#D4A53A;border-width:3px"></x-connector>
 </div>
-<div style="width:760px;display:flex;flex-direction:column;background:#FBF9F3;border:1px solid #DAD3C3;border-radius:20px;padding:40px">
-<table style="font-size:28px;color:#0E1A24">
-<tr><th style="width:42%;text-align:left">Role</th><th style="width:58%;text-align:left">May post</th></tr>
-<tr><td>Admin</td><td>Everything</td></tr>
-<tr><td>Warehouse Manager</td><td>Sales, returns, transfers</td></tr>
-<tr><td>Purchase Officer</td><td>Purchases, returns out</td></tr>
-<tr><td>Analyst</td><td>Nothing, read only</td></tr>
-</table>
-</div>
-</div>
-<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">10 / 13</p>
-<aside>Slide 10 (1 minute). On the sign-in screen you pick a role and enter its passkey. Passkeys are stored only as salted hashes in a separate schema, and five wrong tries lock that address for five minutes. Flask checks the role on every request, and MySQL checks it again inside the procedure, so even a bug in the web layer cannot post an entry the role is not allowed to. The web account has only SELECT and EXECUTE, so SQL injection cannot write to a table.</aside>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#B7C6BC">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#B7C6BC">20 / 25</p>
+<aside>Slide 20 (1.5 minutes). Follow a sign-in left to right. The browser sends a role and a passkey. Flask hands it to sp_login, a procedure that is the only thing allowed to read the separate stock_ledger_auth schema, where passkeys exist only as salted SHA-256 hashes. After sign-in Flask keeps a signed session, checks the role on every route, and blocks an address after five wrong tries in five minutes. When data is written, the database account the web app uses can only read and execute, so even SQL injection could not alter a table, and the procedure checks the role a second time with fn_role_can. Two independent checks, so a bug in one layer is caught by the other. The passkeys in the demo are placeholders that the Admin page can change.</aside>
 </section>

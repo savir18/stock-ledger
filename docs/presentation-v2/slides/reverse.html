@@ -1,0 +1,31 @@
+<section id="reverse" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Transfers and corrections are more rows</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1300px">Moving stock and undoing a mistake both work by adding entries.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#F7F8F2;border:1px solid #CBD2C3;border-radius:8px;padding:32px">
+<h3 style="font-family:'Fraunces', Georgia, serif;font-size:38px;font-weight:700">A transfer</h3>
+<table style="font-size:26px;color:#14212B">
+<tr><th style="width:14%;text-align:left">#</th><th style="width:36%;text-align:left">Warehouse</th><th style="width:30%;text-align:left">Entry</th><th style="width:20%;text-align:right">Qty</th></tr>
+<tr><td>101</td><td>A</td><td>Transfer out</td><td style="text-align:right;font-family:'IBM Plex Mono', monospace;color:#A8201A">−20</td></tr>
+<tr><td>102</td><td>B</td><td>Transfer in</td><td style="text-align:right;font-family:'IBM Plex Mono', monospace">+20</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.4;color:#43515C">Both rows share one transfer id and are written in one transaction: both happen, or neither does.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#F7F8F2;border:1px solid #CBD2C3;border-radius:8px;padding:32px">
+<h3 style="font-family:'Fraunces', Georgia, serif;font-size:38px;font-weight:700">A cancelled sale</h3>
+<table style="font-size:26px;color:#14212B">
+<tr><th style="width:14%;text-align:left">#</th><th style="width:36%;text-align:left">Warehouse</th><th style="width:30%;text-align:left">Entry</th><th style="width:20%;text-align:right">Qty</th></tr>
+<tr><td>103</td><td>A</td><td>Sale</td><td style="text-align:right;font-family:'IBM Plex Mono', monospace;color:#A8201A">−5</td></tr>
+<tr><td>104</td><td>A</td><td>Reversal of 103</td><td style="text-align:right;font-family:'IBM Plex Mono', monospace">+5</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.4;color:#43515C">Row 103 is never touched. Row 104 cancels it and records which row it undoes. Cancelling twice is refused.</p>
+</div>
+</div>
+<p style="font-size:26px;color:#43515C">Rows shown are illustrative. The procedures are sp_transfer_stock and sp_reverse_entry.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">11 / 25</p>
+<aside>Slide 11 (1 minute). Two everyday operations, both just rows. A transfer between warehouses is one minus row in the source and one plus row in the destination, tied together by a transfer id, written in a single transaction so you can never lose stock in transit. A correction is a reversal row: it has the opposite quantity and points at the original. The original stays visible, which is the point: the trail is complete. In the demo, the History page strikes through the cancelled entry and shows the new reversal row.</aside>
+</section>

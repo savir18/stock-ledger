@@ -1,28 +1,22 @@
-<section id="analytics" data-transition="fade" style="background:#0E1A24;color:#F3EFE6;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">Analytics and speed</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Insight from the ledger, read fast</h2>
+<section id="analytics" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Step 4: analytics comes with a ledger</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1400px">History is kept, so questions about the past are ordinary queries.</p>
 </div>
-<div style="display:flex;flex-direction:row;gap:28px;align-items:stretch">
-<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:40px">
-<h3 style="font-size:38px;font-weight:700;color:#5CC2B3">Window functions</h3>
-<ul style="font-size:30px;line-height:1.5;color:#F3EFE6">
-<li>ABC classes by sales value</li>
-<li>Running balance per item</li>
-<li>Weekly trend and forecast</li>
-<li>Dead stock ranking</li>
-<li>Stock on a past date</li>
-</ul>
+<div style="background:#F7F8F2;border:1px solid #CBD2C3;border-radius:8px;padding:24px 32px">
+<table style="font-size:26px;color:#14212B">
+<tr><th style="width:34%;text-align:left">Question</th><th style="width:44%;text-align:left">How it is answered</th><th style="width:22%;text-align:left">Where</th></tr>
+<tr><td>Which products matter most?</td><td>ABC classes from cumulative share of sales</td><td>Insights</td></tr>
+<tr><td>What happened to one item?</td><td>Running balance after every entry</td><td>History</td></tr>
+<tr><td>What will sell next?</td><td>Forecast from weekly sales</td><td>Insights</td></tr>
+<tr><td>What is not selling?</td><td>Dead stock: no sale for N days</td><td>Insights</td></tr>
+<tr><td>What was in stock on a date?</td><td>Add up entries up to that moment</td><td>Insights</td></tr>
+<tr><td>Do the books balance?</td><td>Ledger sum compared with stock_balance</td><td>Safety checks</td></tr>
+</table>
 </div>
-<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:40px">
-<h3 style="font-size:38px;font-weight:700;color:#5CC2B3">Fewer rows read</h3>
-<p style="font-size:30px;line-height:1.4"><b style="color:#E8A93A">No index:</b> full table scan</p>
-<p style="font-size:30px;line-height:1.4"><b style="color:#E8A93A">Index:</b> range lookup on product, warehouse, time</p>
-<p style="font-size:30px;line-height:1.4"><b style="color:#E8A93A">Index + partitions:</b> one quarter read, not the table</p>
-<p style="font-size:28px;line-height:1.4;color:#B9C6D2">Shown live with EXPLAIN in the Speed lab.</p>
-</div>
-</div>
-<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#B9C6D2">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#B9C6D2">9 / 13</p>
-<aside>Slide 9 (1 minute). Because the ledger keeps all history, window functions can answer useful questions: which items matter most, what the trend is, what is dead stock, and what the stock was on any past date. For speed, the Speed lab runs the same query on three table designs and shows rows examined. Show the live numbers from the dashboard rather than quoting any figure here.</aside>
+<p style="font-size:28px;line-height:1.4;width:1500px"><b>Window function:</b> a calculation across related rows that keeps every row, such as a running total.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">14 / 25</p>
+<aside>Slide 14 (1 minute). Because nothing is ever overwritten, the ledger can answer questions about any point in the past. The table shows six questions and how each is answered. The technique to name is the window function: it computes across related rows without collapsing them, which is exactly what a running balance or a cumulative share needs. The last row is a safety question, not a business one: the reconciliation view compares the sum of the ledger with the stored balance, and any difference is flagged.</aside>
 </section>

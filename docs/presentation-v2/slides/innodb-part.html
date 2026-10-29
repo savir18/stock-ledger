@@ -1,0 +1,30 @@
+<section id="innodb-part" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">InnoDB: key order and partitions</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1400px">The ledger is stored in key order and cut into ten slices by date.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:row;gap:33px">
+<div style="width:136px;height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#1F5C47;border-radius:6px"><p style="font-size:24px;text-align:center;color:#F7F8F2;font-weight:600">Before 2026</p></div>
+<div style="width:136px;height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #8A949B;border-radius:6px"><p style="font-size:24px;text-align:center;color:#43515C">2026 Q1</p></div>
+<div style="width:136px;height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #8A949B;border-radius:6px"><p style="font-size:24px;text-align:center;color:#43515C">2026 Q2</p></div>
+<div style="width:136px;height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#1F5C47;border-radius:6px"><p style="font-size:24px;text-align:center;color:#F7F8F2;font-weight:600">2026 Q3</p></div>
+<div style="width:136px;height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #8A949B;border-radius:6px"><p style="font-size:24px;text-align:center;color:#43515C">2026 Q4</p></div>
+<div style="width:136px;height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #8A949B;border-radius:6px"><p style="font-size:24px;text-align:center;color:#43515C">2027 Q1</p></div>
+<div style="width:136px;height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #8A949B;border-radius:6px"><p style="font-size:24px;text-align:center;color:#43515C">2027 Q2</p></div>
+<div style="width:136px;height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #8A949B;border-radius:6px"><p style="font-size:24px;text-align:center;color:#43515C">2027 Q3</p></div>
+<div style="width:136px;height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #8A949B;border-radius:6px"><p style="font-size:24px;text-align:center;color:#43515C">2027 Q4</p></div>
+<div style="width:136px;height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #8A949B;border-radius:6px"><p style="font-size:24px;text-align:center;color:#43515C">Future</p></div>
+</div>
+<p style="font-size:28px;line-height:1.4">A report for September 2026 read 2 of 10 partitions in our test. The filled boxes are the ones read.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;border-top:2px solid #1F5C47;padding:16px 0 0"><h3 style="font-family:'Fraunces', Georgia, serif;font-size:34px;font-weight:700">Clustered key</h3><p style="font-size:26px;line-height:1.4;color:#43515C">InnoDB stores rows in primary-key order, so a stretch of the ledger is read in one sweep.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;border-top:2px solid #1F5C47;padding:16px 0 0"><h3 style="font-family:'Fraunces', Georgia, serif;font-size:34px;font-weight:700">Composite index</h3><p style="font-size:26px;line-height:1.4;color:#43515C">An index on product, warehouse and time finds one item’s history without scanning the table.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;border-top:2px solid #A8201A;padding:16px 0 0"><h3 style="font-family:'Fraunces', Georgia, serif;font-size:34px;font-weight:700">The trade-off</h3><p style="font-size:26px;line-height:1.4;color:#43515C">A partitioned InnoDB table cannot have foreign keys, so trg_ledger_bi checks every reference instead.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">13 / 25</p>
+<aside>Slide 13 (1.5 minutes). The ledger table is partitioned by entry date into ten slices: everything before 2026, eight quarters, and one catch-all for the future. When a report asks for one month, MySQL skips the slices that cannot contain it. In our test a September 2026 report read two of the ten. Two more InnoDB features help: the clustered primary key stores rows in key order, and a composite index on product, warehouse and time finds one item's history quickly. Be honest about the cost: InnoDB does not allow foreign keys on partitioned tables, so a trigger validates every reference instead.</aside>
+</section>

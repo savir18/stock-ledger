@@ -1,0 +1,32 @@
+<section id="limits" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Limits and next steps</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1400px">What the project does not do yet, stated plainly.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:48px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:18px;background:#F7F8F2;border:1px solid #CBD2C3;border-radius:8px;padding:36px">
+<h3 style="font-family:'Fraunces', Georgia, serif;font-size:38px;font-weight:700">Known limits</h3>
+<ul style="font-size:28px;line-height:1.45">
+<li>20,000 demo rows: speed gaps grow with the table</li>
+<li>TRUNCATE and DROP skip triggers, so no app account may run them</li>
+<li>Sign-in lockout is kept in app memory and resets on restart</li>
+<li>Demo passkeys must be changed before real use</li>
+<li>One MySQL server, no replica</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:18px;background:#F7F8F2;border:1px solid #CBD2C3;border-radius:8px;padding:36px">
+<h3 style="font-family:'Fraunces', Georgia, serif;font-size:38px;font-weight:700">Next steps</h3>
+<ul style="font-size:28px;line-height:1.45">
+<li>Barcode scanning on a phone</li>
+<li>Email alerts when stock reaches the reorder level</li>
+<li>A read replica for analytics</li>
+<li>Individual accounts with password reset</li>
+<li>Recovery drills with backups and binary logs</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">24 / 25</p>
+<aside>Slide 24 (45 seconds). Be honest about the limits, it builds trust. The demo database is small, so speed gaps are modest. TRUNCATE and DROP skip triggers, which is why no application account has those rights and why a documented recovery procedure with backups and binary logs exists. The sign-in lockout lives in memory, so it resets when the app restarts. The demo passkeys are placeholders. Then the next steps: barcode scanning, email alerts at the reorder level, a read replica, and individual accounts.</aside>
+</section>

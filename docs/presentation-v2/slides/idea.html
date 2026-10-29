@@ -1,30 +1,29 @@
-<section id="idea" data-transition="fade" style="background:#0E1A24;color:#F3EFE6;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">The idea</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Stock is the sum of what happened</h2>
+<section id="idea" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Stock is the sum of what happened</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1300px">The idea is a bank statement for inventory: write each movement once, never change it.</p>
 </div>
-<div style="display:flex;flex-direction:row;gap:48px;align-items:stretch">
-<div style="flex:1;display:flex;flex-direction:column;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:36px">
-<table style="font-size:30px;color:#F3EFE6">
-<tr><th style="width:15%;text-align:left">#</th><th style="width:55%;text-align:left">Entry</th><th style="width:30%;text-align:right">Qty</th></tr>
-<tr><td>1</td><td>Purchase</td><td style="text-align:right">+100</td></tr>
-<tr><td>2</td><td>Sale</td><td style="text-align:right">−5</td></tr>
-<tr><td>3</td><td>Transfer out</td><td style="text-align:right">−20</td></tr>
-<tr><td>4</td><td>Reversal of #2</td><td style="text-align:right">+5</td></tr>
+<div style="display:flex;flex-direction:row;gap:40px;align-items:stretch">
+<div style="width:560px;display:flex;flex-direction:column;gap:18px;border:1px dashed #8A949B;border-radius:8px;padding:36px">
+<h3 style="font-size:32px;font-weight:600;color:#43515C">Overwrite model</h3>
+<p style="font-family:'IBM Plex Mono', monospace;font-size:96px;font-weight:500;line-height:1;color:#43515C">80</p>
+<p style="font-size:28px;line-height:1.4;color:#43515C">One number, edited in place. The past is lost.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:18px;background:#F7F8F2;border:2px solid #1F5C47;border-radius:8px;padding:36px">
+<h3 style="font-size:32px;font-weight:600;color:#1F5C47">Ledger model</h3>
+<table style="font-size:28px;color:#14212B">
+<tr><th style="width:12%;text-align:left">#</th><th style="width:50%;text-align:left">Entry</th><th style="width:38%;text-align:right">Quantity</th></tr>
+<tr><td>1</td><td>Purchase</td><td style="text-align:right;font-family:'IBM Plex Mono', monospace">+100</td></tr>
+<tr><td>2</td><td>Sale</td><td style="text-align:right;font-family:'IBM Plex Mono', monospace;color:#A8201A">−5</td></tr>
+<tr><td>3</td><td>Transfer out</td><td style="text-align:right;font-family:'IBM Plex Mono', monospace;color:#A8201A">−20</td></tr>
+<tr><td>4</td><td>Cancels #2</td><td style="text-align:right;font-family:'IBM Plex Mono', monospace">+5</td></tr>
 </table>
-</div>
-<div style="width:520px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:12px;background:#E8A93A;color:#0E1A24;border-radius:20px;padding:44px">
-<p style="font-size:28px;font-weight:700;letter-spacing:2px;text-transform:uppercase">On hand</p>
-<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:160px;font-weight:700;line-height:1">80</p>
-<p style="font-size:28px;line-height:1.3">Derived, never typed in</p>
+<div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;border-top:3px double #1F5C47;padding:12px 0 0"><p style="font-size:30px;font-weight:600">On hand, calculated</p><p style="font-family:'IBM Plex Mono', monospace;font-size:48px;font-weight:500;color:#1F5C47">80</p></div>
 </div>
 </div>
-<div style="display:flex;flex-direction:row;gap:24px">
-<p style="font-size:28px;font-weight:700;background:#16283A;border:1px solid #2B4258;border-radius:40px;padding:14px 32px">Append only</p>
-<p style="font-size:28px;font-weight:700;background:#16283A;border:1px solid #2B4258;border-radius:40px;padding:14px 32px">Fix with a new row</p>
-<p style="font-size:28px;font-weight:700;background:#16283A;border:1px solid #2B4258;border-radius:40px;padding:14px 32px">Rebuild any time</p>
-</div>
-<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#B9C6D2">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#B9C6D2">3 / 13</p>
-<aside>Slide 3 (1 minute). Explain it like a bank statement. Every movement is a new row: a purchase, a sale, a transfer. The quantity on hand is just the sum of the rows. If an entry was wrong, you add a cancelling row; you never edit or delete the old one. And because balances come from the rows, they can always be rebuilt and proven.</aside>
+<p style="font-size:30px;line-height:1.4;width:1300px">One rule: you may add a row. You may not change or remove one.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">3 / 25</p>
+<aside>Slide 3 (1 minute). Compare the two models. On the left, one number that gets edited. On the right, a ledger where every movement is its own row and the quantity on hand is simply the sum. If a sale was a mistake, you do not delete it; you add a cancelling entry, and both stay visible. The single rule of the whole project is: you may add a row, you may not change or remove one. Everything else follows from that rule.</aside>
 </section>

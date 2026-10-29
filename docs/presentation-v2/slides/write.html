@@ -1,41 +1,22 @@
-<section id="write" data-transition="fade" style="background:#0E1A24;color:#F3EFE6;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">The write path</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">One sale, end to end</h2>
+<section id="write" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Step 3: one sale, end to end</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1300px">The dashboard can only call a procedure. The procedure does the rest in one transaction.</p>
 </div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px">
-<div style="display:flex;flex-direction:column;gap:10px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
-<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">1</p>
-<h3 style="font-size:34px;font-weight:700">Call</h3>
-<p style="font-size:28px;line-height:1.35;color:#B9C6D2">The dashboard runs sp_record_movement. Nothing else can write.</p>
+<div style="background:#F7F8F2;border:1px solid #CBD2C3;border-radius:8px;padding:24px 32px">
+<table style="font-size:26px;color:#14212B">
+<tr><th style="width:6%;text-align:left">#</th><th style="width:16%;text-align:left">Step</th><th style="width:48%;text-align:left">What happens</th><th style="width:30%;text-align:left">Why it is safe</th></tr>
+<tr><td>1</td><td>Call</td><td>Dashboard runs sp_record_movement</td><td>No direct table writes</td></tr>
+<tr><td>2</td><td>Check role</td><td>fn_role_can: may this role post a sale?</td><td>MySQL checks, not just Flask</td></tr>
+<tr><td>3</td><td>Lock</td><td>Locks the balance row, FOR UPDATE</td><td>InnoDB row lock</td></tr>
+<tr><td>4</td><td>Insert</td><td>One ledger row, validated by trg_ledger_bi</td><td>Trigger and constraints</td></tr>
+<tr><td>5</td><td>Update totals</td><td>trg_ledger_ai updates balance and summary</td><td>Same transaction</td></tr>
+<tr><td>6</td><td>Commit</td><td>Saves everything, or rolls everything back</td><td>Atomicity</td></tr>
+</table>
 </div>
-<div style="display:flex;flex-direction:column;gap:10px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
-<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">2</p>
-<h3 style="font-size:34px;font-weight:700">Check role</h3>
-<p style="font-size:28px;line-height:1.35;color:#B9C6D2">fn_role_can confirms this role may post a sale.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:10px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
-<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">3</p>
-<h3 style="font-size:34px;font-weight:700">Lock</h3>
-<p style="font-size:28px;line-height:1.35;color:#B9C6D2">The balance row is locked with FOR UPDATE.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:10px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
-<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">4</p>
-<h3 style="font-size:34px;font-weight:700">Insert</h3>
-<p style="font-size:28px;line-height:1.35;color:#B9C6D2">One new ledger row. A trigger validates it first.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:10px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
-<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">5</p>
-<h3 style="font-size:34px;font-weight:700">Update totals</h3>
-<p style="font-size:28px;line-height:1.35;color:#B9C6D2">An after-insert trigger updates balance and daily summary.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:10px;background:#1E3550;border:3px solid #E8A93A;border-radius:20px;padding:32px">
-<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">6</p>
-<h3 style="font-size:34px;font-weight:700">Commit</h3>
-<p style="font-size:28px;line-height:1.35;color:#B9C6D2">Any failure rolls the whole thing back.</p>
-</div>
-</div>
-<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#B9C6D2">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#B9C6D2">7 / 13</p>
-<aside>Slide 7 (1 minute). Follow one sale through the six steps. The key point: the dashboard cannot write to a table directly, it can only call the procedure. The procedure checks the role, locks the balance, inserts one row, the triggers update the totals, and everything commits together or rolls back. The live demo shows this working.</aside>
+<p style="font-size:28px;line-height:1.4;width:1400px">If any step fails, nothing is saved. The user sees a plain message such as Insufficient stock.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">10 / 25</p>
+<aside>Slide 10 (1.5 minutes). Follow one sale through six steps. The key idea: the web account is only allowed to run procedures, never to write tables, so every write takes this exact path. Step two is the role check inside MySQL. Step three is the lock: the balance row is locked so no other sale can read the same quantity at the same time. Steps four and five insert the row and update the totals. Step six commits, or rolls everything back if anything failed. The live demo shows this working and then failing safely.</aside>
 </section>

@@ -1,0 +1,34 @@
+<section id="innodb-tx" data-transition="fade" style="background:#0E2B24;color:#EEF1E8;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#D4A53A;opacity:0.45"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">InnoDB: transactions and row locks</h2>
+<p style="font-size:30px;line-height:1.4;color:#B7C6BC;width:1400px">Two people try to sell the last unit at once. Only one can win.</p>
+</div>
+<!-- A row top 10 h96, B row top 230 h96; columns x=170,560,950,1340 w=300 -->
+<div style="position:relative;width:1664px;height:340px">
+<p style="position:absolute;left:0;top:34px;width:150px;font-size:28px;font-weight:600;color:#D4A53A">Session A</p>
+<p style="position:absolute;left:0;top:254px;width:150px;font-size:28px;font-weight:600;color:#D4A53A">Session B</p>
+<div style="position:absolute;left:170px;top:10px;width:300px;height:96px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#163A31;border:2px solid #D4A53A;border-radius:6px"><p style="font-size:26px;text-align:center">Locks the balance row</p></div>
+<div style="position:absolute;left:560px;top:10px;width:300px;height:96px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#163A31;border:2px solid #D4A53A;border-radius:6px"><p style="font-size:26px;text-align:center">Stock is 1: inserts the sale</p></div>
+<div style="position:absolute;left:950px;top:10px;width:300px;height:96px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#163A31;border:2px solid #D4A53A;border-radius:6px"><p style="font-size:26px;text-align:center">COMMIT. Stock is 0</p></div>
+<div style="position:absolute;left:170px;top:230px;width:300px;height:96px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#163A31;border:1px solid #2A5446;border-radius:6px"><p style="font-size:26px;text-align:center">Asks for the same row</p></div>
+<div style="position:absolute;left:560px;top:230px;width:300px;height:96px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #B7C6BC;border-radius:6px"><p style="font-size:26px;text-align:center;color:#B7C6BC">Waits</p></div>
+<div style="position:absolute;left:950px;top:230px;width:300px;height:96px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #B7C6BC;border-radius:6px"><p style="font-size:26px;text-align:center;color:#B7C6BC">Still waiting</p></div>
+<div style="position:absolute;left:1340px;top:230px;width:300px;height:96px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#163A31;border:2px solid #F2877B;border-radius:6px"><p style="font-size:26px;text-align:center;color:#F2877B">Sees stock 0: refused</p></div>
+<x-connector x1="470" y1="58" x2="560" y2="58" style="color:#D4A53A;border-width:3px"></x-connector>
+<x-connector x1="860" y1="58" x2="950" y2="58" style="color:#D4A53A;border-width:3px"></x-connector>
+<x-connector x1="470" y1="278" x2="560" y2="278" style="color:#B7C6BC;border-width:3px"></x-connector>
+<x-connector x1="860" y1="278" x2="950" y2="278" style="color:#B7C6BC;border-width:3px"></x-connector>
+<x-connector x1="1250" y1="58" x2="1490" y2="230" route="hv" style="color:#D4A53A;border-width:3px;border-style:dashed"></x-connector>
+<p style="position:absolute;left:1290px;top:14px;width:300px;font-size:24px;color:#B7C6BC">lock released</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px;border-top:2px solid #D4A53A;padding:14px 0 0"><p style="font-size:28px;font-weight:600">Atomic</p><p style="font-size:24px;line-height:1.35;color:#B7C6BC">All steps happen, or none do.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px;border-top:2px solid #D4A53A;padding:14px 0 0"><p style="font-size:28px;font-weight:600">Consistent</p><p style="font-size:24px;line-height:1.35;color:#B7C6BC">Stock can never go below zero.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px;border-top:2px solid #D4A53A;padding:14px 0 0"><p style="font-size:28px;font-weight:600">Isolated</p><p style="font-size:24px;line-height:1.35;color:#B7C6BC">Row locks keep sessions apart.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px;border-top:2px solid #D4A53A;padding:14px 0 0"><p style="font-size:28px;font-weight:600">Durable</p><p style="font-size:24px;line-height:1.35;color:#B7C6BC">Committed rows survive a restart.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#B7C6BC">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#B7C6BC">12 / 25</p>
+<aside>Slide 12 (2 minutes). This is where InnoDB earns its place. Session A locks the balance row with SELECT FOR UPDATE. Session B asks for the same row and simply waits, because InnoDB locks at row level, so other products are not blocked. A inserts its sale and commits. Only then does B get the lock, see that stock is now zero, and get refused. The four boxes at the bottom are ACID, the properties InnoDB provides: atomic, consistent, isolated, durable. Mention the project has an automatic test where two sessions race for the last units and exactly one wins. In the live demo, the optional two-window locking demo shows this.</aside>
+</section>

@@ -1,19 +1,30 @@
-<section id="triggers" data-transition="fade" style="background:#F3EFE6;color:#0E1A24;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#9A5B00">Immutability</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Four triggers lock the ledger</h2>
+<section id="triggers" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Step 2: four triggers lock the ledger</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1400px">A trigger is code the database runs by itself, before or after a change.</p>
 </div>
-<div style="background:#FBF9F3;border:1px solid #DAD3C3;border-radius:20px;padding:36px">
-<table style="font-size:30px;color:#0E1A24">
-<tr><th style="width:36%;text-align:left">Trigger</th><th style="width:20%;text-align:left">Fires</th><th style="width:44%;text-align:left">What it does</th></tr>
-<tr><td>trg_ledger_no_update</td><td>Before update</td><td>Rejects every update</td></tr>
-<tr><td>trg_ledger_no_delete</td><td>Before delete</td><td>Rejects every delete</td></tr>
-<tr><td>trg_ledger_bi</td><td>Before insert</td><td>Validates each new row</td></tr>
-<tr><td>trg_ledger_ai</td><td>After insert</td><td>Updates balance and summary</td></tr>
-</table>
+<!-- boxes: row y=0,230,410 h=150? uses h=130; columns x=0,461,922,1384 w=280 -->
+<div style="position:relative;width:1664px;height:520px">
+<div style="position:absolute;left:0;top:0;width:280px;height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#F7F8F2;border:2px solid #1F5C47;border-radius:6px"><p style="font-size:28px;font-weight:600">INSERT a row</p></div>
+<div style="position:absolute;left:461px;top:0;width:280px;height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;background:#1F5C47;border-radius:6px"><p style="font-family:'IBM Plex Mono', monospace;font-size:24px;font-weight:500;color:#F7F8F2">trg_ledger_bi</p><p style="font-size:24px;color:#E3EDE6">Validates the row</p></div>
+<div style="position:absolute;left:922px;top:0;width:280px;height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#F7F8F2;border:2px solid #1F5C47;border-radius:6px"><p style="font-size:28px;font-weight:600">Row stored</p></div>
+<div style="position:absolute;left:1384px;top:0;width:280px;height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;background:#1F5C47;border-radius:6px"><p style="font-family:'IBM Plex Mono', monospace;font-size:24px;font-weight:500;color:#F7F8F2">trg_ledger_ai</p><p style="font-size:24px;color:#E3EDE6">Updates the totals</p></div>
+<div style="position:absolute;left:0;top:195px;width:280px;height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#F7F8F2;border:2px solid #A8201A;border-radius:6px"><p style="font-size:28px;font-weight:600">UPDATE a row</p></div>
+<div style="position:absolute;left:461px;top:195px;width:280px;height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;background:#1F5C47;border-radius:6px"><p style="font-family:'IBM Plex Mono', monospace;font-size:22px;font-weight:500;color:#F7F8F2">trg_ledger_no_update</p></div>
+<div style="position:absolute;left:922px;top:195px;width:280px;height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#F7F8F2;border:2px solid #A8201A;border-radius:6px"><p style="font-size:28px;font-weight:600;color:#A8201A">Refused with an error</p></div>
+<div style="position:absolute;left:0;top:390px;width:280px;height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#F7F8F2;border:2px solid #A8201A;border-radius:6px"><p style="font-size:28px;font-weight:600">DELETE a row</p></div>
+<div style="position:absolute;left:461px;top:390px;width:280px;height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#1F5C47;border-radius:6px"><p style="font-family:'IBM Plex Mono', monospace;font-size:22px;font-weight:500;color:#F7F8F2">trg_ledger_no_delete</p></div>
+<div style="position:absolute;left:922px;top:390px;width:280px;height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#F7F8F2;border:2px solid #A8201A;border-radius:6px"><p style="font-size:28px;font-weight:600;color:#A8201A">Refused with an error</p></div>
+<x-connector x1="280" y1="65" x2="461" y2="65" style="color:#1F5C47;border-width:3px"></x-connector>
+<x-connector x1="741" y1="65" x2="922" y2="65" style="color:#1F5C47;border-width:3px"></x-connector>
+<x-connector x1="1202" y1="65" x2="1384" y2="65" style="color:#1F5C47;border-width:3px"></x-connector>
+<x-connector x1="280" y1="260" x2="461" y2="260" style="color:#A8201A;border-width:3px"></x-connector>
+<x-connector x1="741" y1="260" x2="922" y2="260" style="color:#A8201A;border-width:3px"></x-connector>
+<x-connector x1="280" y1="455" x2="461" y2="455" style="color:#A8201A;border-width:3px"></x-connector>
+<x-connector x1="741" y1="455" x2="922" y2="455" style="color:#A8201A;border-width:3px"></x-connector>
 </div>
-<p style="font-size:30px;line-height:1.4;color:#3E4B58">TRUNCATE and DROP skip triggers, so no application account is given those rights.</p>
-<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">8 / 13</p>
-<aside>Slide 8 (1 minute). This is where immutable is enforced by MySQL itself, not by the web page. One trigger blocks updates, one blocks deletes, one validates every new row, and one keeps the balance tables in step. Admit the limit honestly: TRUNCATE and DROP do not fire triggers, so the app account simply does not have those privileges.</aside>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">9 / 25</p>
+<aside>Slide 9 (1.5 minutes). Top row: a normal insert. Before it is stored, trg_ledger_bi checks the product, the warehouse, the movement type and, for a sale, that enough stock exists. After it is stored, trg_ledger_ai updates stock_balance and the daily summary. The two rows below show the immutability: any UPDATE or DELETE on the ledger hits a trigger that raises an error, so the row never changes. Be upfront about one limit: TRUNCATE and DROP do not fire triggers, so no application account is allowed to run them, and recovery relies on backups plus binary logs.</aside>
 </section>

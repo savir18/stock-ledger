@@ -1,24 +1,32 @@
-<section id="testing" data-transition="fade" style="background:#F3EFE6;color:#0E1A24;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#9A5B00">Testing</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Tested against a real MySQL</h2>
+<section id="testing" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Tested against a real MySQL</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1400px">Two suites run on the real database, not on mocks. Both pass.</p>
 </div>
-<div style="display:flex;flex-direction:row;gap:28px">
-<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FBF9F3;border:1px solid #DAD3C3;border-radius:20px;padding:40px">
-<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:104px;font-weight:700;line-height:1;color:#9A5B00">22</p>
-<p style="font-size:30px;line-height:1.35;color:#3E4B58">database checks: schema, triggers, procedures, concurrency</p>
+<div style="display:flex;flex-direction:row;gap:40px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#F7F8F2;border:1px solid #CBD2C3;border-radius:8px;padding:36px">
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:20px"><p style="font-family:'Fraunces', Georgia, serif;font-size:104px;font-weight:700;line-height:1;color:#1F5C47">22</p><p style="font-size:30px;font-weight:600">database checks</p></div>
+<ul style="font-size:26px;line-height:1.5;color:#43515C">
+<li>Tables, constraints and triggers exist</li>
+<li>UPDATE and DELETE are refused</li>
+<li>Overselling is refused and changes nothing</li>
+<li>A transfer is all or nothing</li>
+<li>Two sessions race: exactly one wins</li>
+</ul>
 </div>
-<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FBF9F3;border:1px solid #DAD3C3;border-radius:20px;padding:40px">
-<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:104px;font-weight:700;line-height:1;color:#9A5B00">20</p>
-<p style="font-size:30px;line-height:1.35;color:#3E4B58">web tests: sign-in, passkeys, every role against every action</p>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#F7F8F2;border:1px solid #CBD2C3;border-radius:8px;padding:36px">
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:20px"><p style="font-family:'Fraunces', Georgia, serif;font-size:104px;font-weight:700;line-height:1;color:#1F5C47">20</p><p style="font-size:30px;font-weight:600">web tests</p></div>
+<ul style="font-size:26px;line-height:1.5;color:#43515C">
+<li>Each role signs in with its own passkey</li>
+<li>Wrong passkeys are refused and locked out</li>
+<li>Every role against every route</li>
+<li>MySQL refuses the wrong kind of entry</li>
+<li>The books still balance after all tests</li>
+</ul>
 </div>
-<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FBF9F3;border:1px solid #DAD3C3;border-radius:20px;padding:40px">
-<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:104px;font-weight:700;line-height:1;color:#9A5B00">1</p>
-<p style="font-size:30px;line-height:1.35;color:#3E4B58">winner when two sessions sell the last unit at once</p>
 </div>
-</div>
-<p style="font-size:30px;line-height:1.4;color:#3E4B58">Run on about 20,000 generated movements. All checks pass.</p>
-<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">12 / 13</p>
-<aside>Slide 12 (45 seconds). Two test suites run against the real database. The database checks cover the schema, triggers, procedures and a concurrency test where two sessions race for the last units and exactly one wins. The web tests cover sign-in, passkeys and every role against every action. If asked, show the passing output: python check_setup.py and python tests/test_dashboard.py.</aside>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">22 / 25</p>
+<aside>Slide 22 (45 seconds). Two test suites, both run against a real MySQL server. check_setup.py runs twenty-two database checks: structure, triggers, refusals, atomic transfers, and a concurrency test where two sessions race for the last units and exactly one wins. tests/test_dashboard.py runs twenty web tests: sign-in for each role, wrong passkeys and lockout, every role against every route, and a final check that the books still balance. If asked, show the passing output in a terminal.</aside>
 </section>

@@ -1,0 +1,26 @@
+<section id="roadmap" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">How it was built</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1300px">Six steps in order. Each one rests on the step before it.</p>
+</div>
+<div style="position:relative;width:1664px;height:430px">
+<div style="position:absolute;left:0;top:13px;width:1664px;height:3px;background:#1F5C47"></div>
+<x-shape kind="ellipse" style="position:absolute;left:0;top:0;width:30px;height:30px;background:#1F5C47"></x-shape>
+<x-shape kind="ellipse" style="position:absolute;left:277px;top:0;width:30px;height:30px;background:#1F5C47"></x-shape>
+<x-shape kind="ellipse" style="position:absolute;left:554px;top:0;width:30px;height:30px;background:#1F5C47"></x-shape>
+<x-shape kind="ellipse" style="position:absolute;left:831px;top:0;width:30px;height:30px;background:#1F5C47"></x-shape>
+<x-shape kind="ellipse" style="position:absolute;left:1108px;top:0;width:30px;height:30px;background:#1F5C47"></x-shape>
+<x-shape kind="ellipse" style="position:absolute;left:1385px;top:0;width:30px;height:30px;background:#1F5C47"></x-shape>
+<div style="position:absolute;left:0;top:64px;width:245px;display:flex;flex-direction:column;gap:10px"><p style="font-size:26px;color:#1F5C47;font-weight:600">Step 1</p><h3 style="font-family:'Fraunces', Georgia, serif;font-size:32px;font-weight:700">Data model</h3><p style="font-size:26px;line-height:1.35;color:#43515C">12 tables around one ledger, with checks on every column.</p></div>
+<div style="position:absolute;left:277px;top:64px;width:245px;display:flex;flex-direction:column;gap:10px"><p style="font-size:26px;color:#1F5C47;font-weight:600">Step 2</p><h3 style="font-family:'Fraunces', Georgia, serif;font-size:32px;font-weight:700">Triggers</h3><p style="font-size:26px;line-height:1.35;color:#43515C">Four triggers make the ledger append-only.</p></div>
+<div style="position:absolute;left:554px;top:64px;width:245px;display:flex;flex-direction:column;gap:10px"><p style="font-size:26px;color:#1F5C47;font-weight:600">Step 3</p><h3 style="font-family:'Fraunces', Georgia, serif;font-size:32px;font-weight:700">Procedures</h3><p style="font-size:26px;line-height:1.35;color:#43515C">Every write is one transaction with locks.</p></div>
+<div style="position:absolute;left:831px;top:64px;width:245px;display:flex;flex-direction:column;gap:10px"><p style="font-size:26px;color:#1F5C47;font-weight:600">Step 4</p><h3 style="font-family:'Fraunces', Georgia, serif;font-size:32px;font-weight:700">Analytics</h3><p style="font-size:26px;line-height:1.35;color:#43515C">Window functions answer questions about the past.</p></div>
+<div style="position:absolute;left:1108px;top:64px;width:245px;display:flex;flex-direction:column;gap:10px"><p style="font-size:26px;color:#1F5C47;font-weight:600">Step 5</p><h3 style="font-family:'Fraunces', Georgia, serif;font-size:32px;font-weight:700">Speed</h3><p style="font-size:26px;line-height:1.35;color:#43515C">Indexes and partitions, checked with EXPLAIN.</p></div>
+<div style="position:absolute;left:1385px;top:64px;width:245px;display:flex;flex-direction:column;gap:10px"><p style="font-size:26px;color:#1F5C47;font-weight:600">Step 6</p><h3 style="font-family:'Fraunces', Georgia, serif;font-size:32px;font-weight:700">Dashboard</h3><p style="font-size:26px;line-height:1.35;color:#43515C">Role and passkey sign-in on a Flask app.</p></div>
+</div>
+<p style="font-size:30px;line-height:1.4;width:1300px">The dashboard comes last on purpose: by then the database already enforces every rule.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">5 / 25</p>
+<aside>Slide 5 (1 minute). Walk the six steps left to right. First the data model: twelve tables. Second, triggers that make the ledger append-only. Third, stored procedures so every write is one transaction. Fourth, analytics with window functions. Fifth, speed: indexes and partitions, proved with EXPLAIN. Sixth, the dashboard. The order matters: because the rules live in the database, the web layer can stay thin and no bug in it can break the ledger.</aside>
+</section>

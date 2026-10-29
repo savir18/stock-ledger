@@ -1,36 +1,35 @@
-<section id="model" data-transition="fade" style="background:#0E1A24;color:#F3EFE6;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">The data model</p>
-<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Twelve tables, one at the centre</h2>
+<section id="model" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Step 1: the data model</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1300px">Everything feeds the ledger. Two tables below it are derived from it.</p>
 </div>
-<div style="display:flex;flex-direction:row;gap:24px;align-items:stretch">
-<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
-<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5CC2B3">People · 2</p>
-<p style="font-size:28px">role</p>
-<p style="font-size:28px">app_user</p>
+<!-- boxes: category 0,0,240,64 | product 300,0,300,64 | txn_type 680,0,300,64 | stock_transfer 1060,0,300,64 | role 1420,0,244,64 | warehouse 0,246,240,64 | stock_ledger 300,230,1060,96 | app_user 1420,246,244,64 | stock_balance 300,430,380,64 | daily_stock_summary 980,430,380,64 -->
+<div style="position:relative;width:1664px;height:500px">
+<p style="position:absolute;left:0;top:0;width:240px;height:64px;line-height:64px;text-align:center;font-family:'IBM Plex Mono', monospace;font-size:24px;background:#F7F8F2;border:2px solid #1F5C47;border-radius:6px">category</p>
+<p style="position:absolute;left:300px;top:0;width:300px;height:64px;line-height:64px;text-align:center;font-family:'IBM Plex Mono', monospace;font-size:24px;background:#F7F8F2;border:2px solid #1F5C47;border-radius:6px">product</p>
+<p style="position:absolute;left:680px;top:0;width:300px;height:64px;line-height:64px;text-align:center;font-family:'IBM Plex Mono', monospace;font-size:24px;background:#F7F8F2;border:2px solid #1F5C47;border-radius:6px">txn_type</p>
+<p style="position:absolute;left:1060px;top:0;width:300px;height:64px;line-height:64px;text-align:center;font-family:'IBM Plex Mono', monospace;font-size:24px;background:#F7F8F2;border:2px solid #1F5C47;border-radius:6px">stock_transfer</p>
+<p style="position:absolute;left:1420px;top:0;width:244px;height:64px;line-height:64px;text-align:center;font-family:'IBM Plex Mono', monospace;font-size:24px;background:#F7F8F2;border:2px solid #1F5C47;border-radius:6px">role</p>
+<p style="position:absolute;left:0;top:246px;width:240px;height:64px;line-height:64px;text-align:center;font-family:'IBM Plex Mono', monospace;font-size:24px;background:#F7F8F2;border:2px solid #1F5C47;border-radius:6px">warehouse</p>
+<p style="position:absolute;left:300px;top:230px;width:1060px;height:96px;line-height:96px;text-align:center;font-family:'IBM Plex Mono', monospace;font-size:30px;font-weight:500;background:#1F5C47;color:#F7F8F2;border-radius:6px">stock_ledger</p>
+<p style="position:absolute;left:1420px;top:246px;width:244px;height:64px;line-height:64px;text-align:center;font-family:'IBM Plex Mono', monospace;font-size:24px;background:#F7F8F2;border:2px solid #1F5C47;border-radius:6px">app_user</p>
+<p style="position:absolute;left:300px;top:430px;width:380px;height:64px;line-height:64px;text-align:center;font-family:'IBM Plex Mono', monospace;font-size:24px;background:#F7F8F2;border:2px dashed #1F5C47;border-radius:6px">stock_balance</p>
+<p style="position:absolute;left:980px;top:430px;width:380px;height:64px;line-height:64px;text-align:center;font-family:'IBM Plex Mono', monospace;font-size:24px;background:#F7F8F2;border:2px dashed #1F5C47;border-radius:6px">daily_stock_summary</p>
+<x-connector x1="240" y1="32" x2="300" y2="32" style="color:#1F5C47;border-width:3px"></x-connector>
+<x-connector x1="450" y1="64" x2="450" y2="230" style="color:#1F5C47;border-width:3px"></x-connector>
+<x-connector x1="830" y1="64" x2="830" y2="230" style="color:#1F5C47;border-width:3px"></x-connector>
+<x-connector x1="1210" y1="64" x2="1210" y2="230" style="color:#1F5C47;border-width:3px"></x-connector>
+<x-connector x1="1542" y1="64" x2="1542" y2="246" style="color:#1F5C47;border-width:3px"></x-connector>
+<x-connector x1="240" y1="278" x2="300" y2="278" style="color:#1F5C47;border-width:3px"></x-connector>
+<x-connector x1="1420" y1="278" x2="1360" y2="278" style="color:#1F5C47;border-width:3px"></x-connector>
+<x-connector x1="490" y1="326" x2="490" y2="430" style="color:#1F5C47;border-width:3px;border-style:dashed"></x-connector>
+<x-connector x1="1170" y1="326" x2="1170" y2="430" style="color:#1F5C47;border-width:3px;border-style:dashed"></x-connector>
+<p style="position:absolute;left:510px;top:360px;width:420px;font-size:24px;color:#43515C">updated by a trigger</p>
+<p style="position:absolute;left:1190px;top:360px;width:420px;font-size:24px;color:#43515C">updated by a trigger</p>
 </div>
-<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
-<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5CC2B3">Catalog · 5</p>
-<p style="font-size:28px">category</p>
-<p style="font-size:28px">supplier</p>
-<p style="font-size:28px">warehouse</p>
-<p style="font-size:28px">product</p>
-<p style="font-size:28px">product_supplier</p>
-</div>
-<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#1E3550;border:3px solid #E8A93A;border-radius:20px;padding:32px">
-<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#E8A93A">Movement · 3</p>
-<p style="font-size:28px">txn_type</p>
-<p style="font-size:28px">stock_transfer</p>
-<p style="font-size:32px;font-weight:700;color:#E8A93A">stock_ledger</p>
-</div>
-<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
-<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5CC2B3">Derived · 2</p>
-<p style="font-size:28px">stock_balance</p>
-<p style="font-size:28px">daily_stock_summary</p>
-</div>
-</div>
-<p style="font-size:30px;line-height:1.4;color:#B9C6D2">The ledger is split into quarterly partitions. It has no foreign keys, so a trigger checks every reference. The derived tables can be rebuilt from the ledger at any time.</p>
-<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#B9C6D2">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#B9C6D2">5 / 13</p>
-<aside>Slide 5 (1 minute). Four groups: people and roles, the product catalog, the movement tables, and the derived tables. The stock_ledger table is the centre and the only source of truth. Balances and daily summaries are copies kept in step by triggers and can be rebuilt. Mention the design is in BCNF.</aside>
+<p style="font-size:26px;line-height:1.4;color:#43515C;width:1500px">Not drawn: supplier, and product_supplier, which says which supplier sells which product. Dashed boxes can be rebuilt from the ledger at any time.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">6 / 25</p>
+<aside>Slide 6 (1.5 minutes). Read the diagram from the top. A product belongs to a category. A ledger entry records which product, which kind of movement, optionally which transfer it belongs to, plus the warehouse and the user who did it, and users have roles. The two dashed tables at the bottom are derived: stock_balance holds the current quantity per product and warehouse, and daily_stock_summary holds in and out per day. Triggers keep them in step, and they can be rebuilt from the ledger. Mention the design is in BCNF: every fact lives in one place.</aside>
 </section>

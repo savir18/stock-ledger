@@ -1,0 +1,30 @@
+<section id="speed" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Step 5: reading fewer rows</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1400px">The same question on three table designs. EXPLAIN shows how many rows each reads.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:48px;align-items:stretch">
+<div style="width:880px;display:flex;flex-direction:column;gap:16px;background:#F7F8F2;border:1px solid #CBD2C3;border-radius:8px;padding:32px">
+<p style="font-size:26px;font-weight:600">Rows examined: one product’s last 90 days</p>
+<div style="height:340px;display:flex;flex-direction:row;align-items:flex-end;gap:48px;border-bottom:2px solid #14212B">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px"><p style="font-family:'IBM Plex Mono', monospace;font-size:28px;font-weight:500;text-align:center">21,867</p><div style="height:290px;background:#8A949B"></div></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px"><p style="font-family:'IBM Plex Mono', monospace;font-size:28px;font-weight:500;text-align:center;color:#1F5C47">335</p><div style="height:6px;background:#1F5C47"></div></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px"><p style="font-family:'IBM Plex Mono', monospace;font-size:28px;font-weight:500;text-align:center;color:#1F5C47">335</p><div style="height:6px;background:#1F5C47"></div></div>
+</div>
+<div style="display:flex;flex-direction:row;gap:48px">
+<p style="flex:1;font-size:24px;line-height:1.3;text-align:center">No index</p>
+<p style="flex:1;font-size:24px;line-height:1.3;text-align:center">Index</p>
+<p style="flex:1;font-size:24px;line-height:1.3;text-align:center">Index and partitions</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:16px">
+<div style="border-top:2px solid #1F5C47;padding:14px 0 0"><h3 style="font-size:30px;font-weight:600">How to read the plan</h3><p style="font-size:26px;line-height:1.4;color:#43515C">ALL is a full scan. Range is an index lookup. The partitions column lists the slices read.</p></div>
+<div style="border-top:2px solid #1F5C47;padding:14px 0 0"><h3 style="font-size:30px;font-weight:600">Rows examined is the proof</h3><p style="font-size:26px;line-height:1.4;color:#43515C">At 20,000 rows the milliseconds are close. The gap in time grows with the table.</p></div>
+<div style="border-top:2px solid #1F5C47;padding:14px 0 0"><h3 style="font-size:30px;font-weight:600">Measured here</h3><p style="font-size:26px;line-height:1.4;color:#43515C">A 22,000-row test database on MySQL 8.0. Your numbers will differ a little.</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">15 / 25</p>
+<aside>Slide 15 (1.5 minutes). The Speed lab runs the same query on three copies of the ledger: a plain table, an indexed table, and the real partitioned and indexed ledger. In our test the plain table examined about 21,900 rows, a full scan. With the composite index the database looked at about 335, a range lookup. Say that rows examined is the honest measure: at only twenty thousand rows the milliseconds are all close, and the time gap opens up as the table grows, so the project can be rebuilt with 200,000 rows. Show the live numbers from the Speed lab rather than quoting these.</aside>
+</section>

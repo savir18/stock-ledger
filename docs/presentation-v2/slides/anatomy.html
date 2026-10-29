@@ -1,0 +1,24 @@
+<section id="anatomy" data-transition="fade" style="background:repeating-linear-gradient(to bottom, #ECEFE6 0px, #ECEFE6 53px, #E0E5D8 53px, #E0E5D8 54px);color:#14212B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="position:absolute;left:96px;top:0;width:2px;height:1080px;background:#C9534A;opacity:0.5"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:'Fraunces', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1">Anatomy of one ledger row</h2>
+<p style="font-size:30px;line-height:1.4;color:#43515C;width:1300px">Each entry answers what, where, how much, when and who.</p>
+</div>
+<div style="background:#F7F8F2;border:1px solid #CBD2C3;border-radius:8px;padding:24px 32px">
+<table style="font-size:26px;color:#14212B">
+<tr><th style="width:26%;text-align:left">Column</th><th style="width:46%;text-align:left">Meaning</th><th style="width:28%;text-align:left">Example</th></tr>
+<tr><td style="font-family:'IBM Plex Mono', monospace">ledger_id</td><td>Auto-number of the entry</td><td style="font-family:'IBM Plex Mono', monospace">20417</td></tr>
+<tr><td style="font-family:'IBM Plex Mono', monospace">entry_time</td><td>When it happened, to the microsecond</td><td style="font-family:'IBM Plex Mono', monospace">2026-10-29 14:02</td></tr>
+<tr><td style="font-family:'IBM Plex Mono', monospace">product_id</td><td>What moved</td><td style="font-family:'IBM Plex Mono', monospace">12</td></tr>
+<tr><td style="font-family:'IBM Plex Mono', monospace">warehouse_id</td><td>Where it moved</td><td style="font-family:'IBM Plex Mono', monospace">1</td></tr>
+<tr><td style="font-family:'IBM Plex Mono', monospace">type_id</td><td>Kind of movement: sale, purchase, and so on</td><td>Sale</td></tr>
+<tr><td style="font-family:'IBM Plex Mono', monospace">quantity_change</td><td>Signed amount. Never zero.</td><td style="font-family:'IBM Plex Mono', monospace;color:#A8201A">−5</td></tr>
+<tr><td style="font-family:'IBM Plex Mono', monospace">user_id</td><td>Who recorded it</td><td style="font-family:'IBM Plex Mono', monospace">3</td></tr>
+<tr><td style="font-family:'IBM Plex Mono', monospace">reverses_ledger_id</td><td>Set only on a cancelling entry</td><td style="font-family:'IBM Plex Mono', monospace">20417</td></tr>
+</table>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#43515C;width:1500px">The primary key is (ledger_id, entry_time), because a partitioned table needs the partition column in its key. Example values are illustrative.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">8 / 25</p>
+<aside>Slide 8 (1 minute). This is the heart of the database. Each row says what moved, where, what kind of movement it was, by how much, when, and who did it. The quantity is signed: positive adds stock, negative removes it, and zero is not allowed. A cancelling entry fills reverses_ledger_id with the id of the row it undoes. If asked about the odd primary key: MySQL requires the partitioning column to be part of every unique key, so entry_time joins ledger_id.</aside>
+</section>
