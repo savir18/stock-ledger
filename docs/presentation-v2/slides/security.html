@@ -1,0 +1,26 @@
+<section id="security" data-transition="fade" style="background:#F3EFE6;color:#0E1A24;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#9A5B00">Security</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Choose a role, enter its passkey</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:28px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:18px;background:#FBF9F3;border:1px solid #DAD3C3;border-radius:20px;padding:40px">
+<h3 style="font-size:36px;font-weight:700;color:#1F7A6F">Three guards</h3>
+<p style="font-size:28px;line-height:1.4"><b>1. Passkey.</b> Salted SHA-256 hash in a separate schema the web account cannot read.</p>
+<p style="font-size:28px;line-height:1.4"><b>2. Flask.</b> Checks the role on every route.</p>
+<p style="font-size:28px;line-height:1.4"><b>3. MySQL.</b> The procedure checks the role again. The web account can only read and execute.</p>
+</div>
+<div style="width:760px;display:flex;flex-direction:column;background:#FBF9F3;border:1px solid #DAD3C3;border-radius:20px;padding:40px">
+<table style="font-size:28px;color:#0E1A24">
+<tr><th style="width:42%;text-align:left">Role</th><th style="width:58%;text-align:left">May post</th></tr>
+<tr><td>Admin</td><td>Everything</td></tr>
+<tr><td>Warehouse Manager</td><td>Sales, returns, transfers</td></tr>
+<tr><td>Purchase Officer</td><td>Purchases, returns out</td></tr>
+<tr><td>Analyst</td><td>Nothing, read only</td></tr>
+</table>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">10 / 13</p>
+<aside>Slide 10 (1 minute). On the sign-in screen you pick a role and enter its passkey. Passkeys are stored only as salted hashes in a separate schema, and five wrong tries lock that address for five minutes. Flask checks the role on every request, and MySQL checks it again inside the procedure, so even a bug in the web layer cannot post an entry the role is not allowed to. The web account has only SELECT and EXECUTE, so SQL injection cannot write to a table.</aside>
+</section>

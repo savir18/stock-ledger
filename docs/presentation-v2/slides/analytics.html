@@ -1,0 +1,28 @@
+<section id="analytics" data-transition="fade" style="background:#0E1A24;color:#F3EFE6;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">Analytics and speed</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Insight from the ledger, read fast</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:28px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:40px">
+<h3 style="font-size:38px;font-weight:700;color:#5CC2B3">Window functions</h3>
+<ul style="font-size:30px;line-height:1.5;color:#F3EFE6">
+<li>ABC classes by sales value</li>
+<li>Running balance per item</li>
+<li>Weekly trend and forecast</li>
+<li>Dead stock ranking</li>
+<li>Stock on a past date</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:40px">
+<h3 style="font-size:38px;font-weight:700;color:#5CC2B3">Fewer rows read</h3>
+<p style="font-size:30px;line-height:1.4"><b style="color:#E8A93A">No index:</b> full table scan</p>
+<p style="font-size:30px;line-height:1.4"><b style="color:#E8A93A">Index:</b> range lookup on product, warehouse, time</p>
+<p style="font-size:30px;line-height:1.4"><b style="color:#E8A93A">Index + partitions:</b> one quarter read, not the table</p>
+<p style="font-size:28px;line-height:1.4;color:#B9C6D2">Shown live with EXPLAIN in the Speed lab.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#B9C6D2">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#B9C6D2">9 / 13</p>
+<aside>Slide 9 (1 minute). Because the ledger keeps all history, window functions can answer useful questions: which items matter most, what the trend is, what is dead stock, and what the stock was on any past date. For speed, the Speed lab runs the same query on three table designs and shows rows examined. Show the live numbers from the dashboard rather than quoting any figure here.</aside>
+</section>

@@ -1,0 +1,19 @@
+<section id="triggers" data-transition="fade" style="background:#F3EFE6;color:#0E1A24;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#9A5B00">Immutability</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Four triggers lock the ledger</h2>
+</div>
+<div style="background:#FBF9F3;border:1px solid #DAD3C3;border-radius:20px;padding:36px">
+<table style="font-size:30px;color:#0E1A24">
+<tr><th style="width:36%;text-align:left">Trigger</th><th style="width:20%;text-align:left">Fires</th><th style="width:44%;text-align:left">What it does</th></tr>
+<tr><td>trg_ledger_no_update</td><td>Before update</td><td>Rejects every update</td></tr>
+<tr><td>trg_ledger_no_delete</td><td>Before delete</td><td>Rejects every delete</td></tr>
+<tr><td>trg_ledger_bi</td><td>Before insert</td><td>Validates each new row</td></tr>
+<tr><td>trg_ledger_ai</td><td>After insert</td><td>Updates balance and summary</td></tr>
+</table>
+</div>
+<p style="font-size:30px;line-height:1.4;color:#3E4B58">TRUNCATE and DROP skip triggers, so no application account is given those rights.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6672">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#5B6672">8 / 13</p>
+<aside>Slide 8 (1 minute). This is where immutable is enforced by MySQL itself, not by the web page. One trigger blocks updates, one blocks deletes, one validates every new row, and one keeps the balance tables in step. Admit the limit honestly: TRUNCATE and DROP do not fire triggers, so the app account simply does not have those privileges.</aside>
+</section>

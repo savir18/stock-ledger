@@ -1,0 +1,36 @@
+<section id="model" data-transition="fade" style="background:#0E1A24;color:#F3EFE6;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">The data model</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Twelve tables, one at the centre</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5CC2B3">People · 2</p>
+<p style="font-size:28px">role</p>
+<p style="font-size:28px">app_user</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5CC2B3">Catalog · 5</p>
+<p style="font-size:28px">category</p>
+<p style="font-size:28px">supplier</p>
+<p style="font-size:28px">warehouse</p>
+<p style="font-size:28px">product</p>
+<p style="font-size:28px">product_supplier</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#1E3550;border:3px solid #E8A93A;border-radius:20px;padding:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#E8A93A">Movement · 3</p>
+<p style="font-size:28px">txn_type</p>
+<p style="font-size:28px">stock_transfer</p>
+<p style="font-size:32px;font-weight:700;color:#E8A93A">stock_ledger</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5CC2B3">Derived · 2</p>
+<p style="font-size:28px">stock_balance</p>
+<p style="font-size:28px">daily_stock_summary</p>
+</div>
+</div>
+<p style="font-size:30px;line-height:1.4;color:#B9C6D2">The ledger is split into quarterly partitions. It has no foreign keys, so a trigger checks every reference. The derived tables can be rebuilt from the ledger at any time.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#B9C6D2">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#B9C6D2">5 / 13</p>
+<aside>Slide 5 (1 minute). Four groups: people and roles, the product catalog, the movement tables, and the derived tables. The stock_ledger table is the centre and the only source of truth. Balances and daily summaries are copies kept in step by triggers and can be rebuilt. Mention the design is in BCNF.</aside>
+</section>

@@ -1,0 +1,41 @@
+<section id="write" data-transition="fade" style="background:#0E1A24;color:#F3EFE6;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#E8A93A">The write path</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">One sale, end to end</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px">
+<div style="display:flex;flex-direction:column;gap:10px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">1</p>
+<h3 style="font-size:34px;font-weight:700">Call</h3>
+<p style="font-size:28px;line-height:1.35;color:#B9C6D2">The dashboard runs sp_record_movement. Nothing else can write.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">2</p>
+<h3 style="font-size:34px;font-weight:700">Check role</h3>
+<p style="font-size:28px;line-height:1.35;color:#B9C6D2">fn_role_can confirms this role may post a sale.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">3</p>
+<h3 style="font-size:34px;font-weight:700">Lock</h3>
+<p style="font-size:28px;line-height:1.35;color:#B9C6D2">The balance row is locked with FOR UPDATE.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">4</p>
+<h3 style="font-size:34px;font-weight:700">Insert</h3>
+<p style="font-size:28px;line-height:1.35;color:#B9C6D2">One new ledger row. A trigger validates it first.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#16283A;border:1px solid #2B4258;border-radius:20px;padding:32px">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">5</p>
+<h3 style="font-size:34px;font-weight:700">Update totals</h3>
+<p style="font-size:28px;line-height:1.35;color:#B9C6D2">An after-insert trigger updates balance and daily summary.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#1E3550;border:3px solid #E8A93A;border-radius:20px;padding:32px">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:48px;font-weight:700;color:#E8A93A">6</p>
+<h3 style="font-size:34px;font-weight:700">Commit</h3>
+<p style="font-size:28px;line-height:1.35;color:#B9C6D2">Any failure rolls the whole thing back.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#B9C6D2">BCSE302P · Immutable Stock Ledger · Savir Ghai, 24BCT0309</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-size:24px;color:#B9C6D2">7 / 13</p>
+<aside>Slide 7 (1 minute). Follow one sale through the six steps. The key point: the dashboard cannot write to a table directly, it can only call the procedure. The procedure checks the role, locks the balance, inserts one row, the triggers update the totals, and everything commits together or rolls back. The live demo shows this working.</aside>
+</section>
